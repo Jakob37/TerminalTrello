@@ -4,7 +4,7 @@
 import argparse
 import configparser
 from trello import TrelloClient
-
+import sys
 
 
 def main():
@@ -15,12 +15,8 @@ def main():
     config.readfp(open(args.conf))
 
     client = setup_trello_client(config)
-
-    print(dir(client))
-    print(client.list_boards())
-
-    # TODO next: Investigate why autoamtic token authorization isn't going through
-    # Can I get it through interactively?
+    boards = client.list_boards()
+    print(boards)
 
 
 def setup_trello_client(conf):
@@ -30,13 +26,8 @@ def setup_trello_client(conf):
     token_key = conf.get('tokens', 'token_key')
     token_secret = conf.get('tokens', 'token_secret')
 
-    client = TrelloClient(
-        api_key=api_key,
-        api_secret=api_secret,
-        token=token_key,
-        token_secret=token_secret
-    )
-    
+    client = TrelloClient(api_key=api_key, api_secret=api_secret, token=token_key, token_secret=token_secret)
+
     return client
 
 
