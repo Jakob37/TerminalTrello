@@ -19,6 +19,9 @@ def main():
     print(dir(client))
     print(client.list_boards())
 
+    # TODO next: Investigate why autoamtic token authorization isn't going through
+    # Can I get it through interactively?
+
 
 def setup_trello_client(conf):
 
@@ -37,13 +40,9 @@ def setup_trello_client(conf):
     return client
 
 
-
-
-
 def parse_arguments():
 
     parser = argparse.ArgumentParser()
-    # parser.add_argument('type')
     parser.add_argument('--conf', required=True)
     args = parser.parse_args()
     return args
